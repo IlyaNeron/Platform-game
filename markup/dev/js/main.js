@@ -1,120 +1,78 @@
 'use strict';
 
-////
-let platformStructure = {
+function GameElements() {
+    this.box = HTMLElement;
+    this.background = HTMLElement;
+    this.move_state_left = Boolean;
+    this.move_state_right = Boolean;
+}
 
-    init() {
-      this.box();
-      this.text();
-      this.alert();
+GameElements.prototype = {
+
+    init: function () {
+        this.box = document.querySelector('.box');
+        this.background = Array.from(document.querySelectorAll('.background-layer'));
+        this.bgwidth = this.background.offsetWidth;
+        this.bg_offset = 100;
+        this.move_state_left = true;
+        this.move_state_right = true;
+        this.events();
     },
 
-	box: function () {
-		this.el = document.querySelector('.box');
-		console.log(this.el)
-	},
+    events: function () {
+        document.addEventListener('keydown', this.backgroundMove.bind(this));
+    },
 
-	text: function (e) {
-		e = 'works';
-		console.log(e);
-	},
+    backgroundMove: function (e) {
+        if (this.move_state_right) {
 
-	alert: function () {
-		this.el.addEventListener('click', function () {
-			alert('works');
-		});
-	},
+            if (e.key === 'ArrowRight') {
+                this.move_state_left = true;
+                this.bg_offset += 2;
+                this.background.forEach(function (div) {
+                    div.style.transform = 'translate3d(' + -this.bg_offset + '%' + ',' + '0px' + ',' + '0px' + ')';
+                }, this);
+                this.disableMoveRight();
+                // if (this.bg_offset === -100) {
+                //     this.bg_offset = 10;
+                // }
+            }
+
+        }
+
+        if (this.move_state_left) {
+
+            if (e.key === 'ArrowLeft') {
+                this.move_state_right = true;
+                this.bg_offset -= 2;
+                this.background.forEach(function (div) {
+                    div.style.transform = 'translate3d(' + -this.bg_offset + '%' + ',' + '0px' + ',' + '0px' + ')';
+                }, this);
+                this.disableMoveLeft();
+                // if (this.bg_offset === 100) {
+                //     this.bg_offset = -10;
+                // }
+            }
+
+        }
+
+    },
+
+    disableMoveLeft: function () {
+        if (this.bg_offset === 0) {
+            console.log(this.bg_offset);
+            this.move_state_left = false;
+        }
+    },
+
+    disableMoveRight: function () {
+        if (this.bg_offset === 200) {
+            console.log(this.bg_offset);
+            this.move_state_right = false;
+        }
+    },
 
 };
 
-platformStructure.init();
-////
-
-////
-class Person {
-
-    constructor(firstName, lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    getFullName() {
-        return this.firstName + " " + this.lastName;
-    }
-
-}
-
-class Student extends Person {
-
-    constructor(studentId, firstName, lastName) {
-        super(firstName, lastName);
-        this.studentId = studentId;
-    }
-
-    getStudentInfo() {
-        return this.studentId + " " + this.lastName + ", " + this.firstName;
-    }
-
-}
-
-let student = new Student(1, "Bob", "Smith");
-console.log(student.getFullName());
-console.log(student.getStudentInfo());
-////
-
-
-////
-// объект функции 'getFullName'
-function getFullName() {
-    return this.firstName + " " + this.lastName;
-}
-
-let person1 = {
-    firstName: "Bob",
-    lastName: "Smith",
-    // свойство с именем 'getFullName' привязано к приведенному выше объекту функции 'getFullName'
-    getFullName: getFullName
-};
-
-let person2 = {
-    firstName: "Tim",
-    lastName: "Johnson",
-    // свойство с именем 'getFullName' привязано к приведенному выше объекту функции 'getFullName'
-    getFullName: getFullName
-};
-
-// вывод "Bob Smith"
-console.log(person1.getFullName());
-
-// вывод "Tim   Johnson"
-console.log(person2.getFullName());
-
-// вывод "true" потому что оба свойства указывают на ту же функцию
-console.log(person1.getFullName === person2.getFullName);
-////
-
-
-////
-class test {
-    constructor() {}
-
-    init() {
-        this.alert();
-        prompt(this.text);
-    }
-
-    alert() {
-        this.text = 'text';
-        alert('text');
-        console.log(this.text);
-        document.querySelector('.box').addEventListener('click', new test().alert);
-    }
-}
-
-class test2 extends test {
-    init2() {
-        this.init();
-    }
-}
-
-new test2().init2();
+let game = new GameElements();
+game.init();
