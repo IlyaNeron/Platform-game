@@ -3,11 +3,11 @@
 function GameElements() {
     this.box = document.querySelector('.box');
     this.background = Array.from(document.querySelectorAll('.background-layer'));
+    this.fullBackground = document.querySelector('.game-background');
     this.platform = document.querySelector('.game-platform');
     this.platform_fixed = document.querySelector('.platform-fixed');
-    this.platform_offset_x = 100;
-    this.platform_offset_y = 0;
-    this.move_state_left = true;
+    this.platform_offset_x = null;
+    this.move_state_left = false;
     this.move_state_right = true;
 }
 
@@ -15,42 +15,55 @@ GameElements.prototype = {
     init: function () {
         this.coordinates();
         this.events();
+        this.disableMoveRight();
+        this.disableMoveLeft();
     },
 
-    coordinates: function (bgCoordinateX, platformWidth, platformLeft) {
+    coordinates: function () {
         this.background.forEach(function (div) {
-            bgCoordinateX = getComputedStyle(div);
-            let matrix = new WebKitCSSMatrix(bgCoordinateX.webkitTransform);
+            this.bgCoordinateX = getComputedStyle(div);
+            let matrix = new WebKitCSSMatrix(this.bgCoordinateX.webkitTransform);
             this.bg_offset = matrix.m41;
         }, this);
 
-        platformWidth = getComputedStyle(this.platform).width;
-        platformLeft = getComputedStyle(this.platform).left;
-        console.log(platformWidth);
-        console.log(platformLeft);
+        this.platformWidth = parseInt(getComputedStyle(this.platform).width, 10);
+        this.bgwidth = parseInt(getComputedStyle(this.fullBackground).width, 10);
+        console.log('Platform width', this.platformWidth);
+        console.log('Background width', this.bgwidth);
     },
 
     events: function () {
-        document.addEventListener('keydown', this.backgroundMove.bind(this));
+        document.addEventListener('keydown', this.elementsMove.bind(this));
         document.addEventListener('keydown', this.circleMoveUp.bind(this));
     },
 
     platformMoveRight: function () {
-        this.platform_offset_x += .5;
-        this.platform.style.left = -this.platform_offset_x + '%';
+        this.platform_offset_x -= 20;
+        this.platform.style.left = this.platform_offset_x + 'px';
     },
 
     platformMoveLeft: function () {
-        this.platform_offset_x -= .5;
-        this.platform.style.left = -this.platform_offset_x + '%';
+        this.platform_offset_x += 20;
+        this.platform.style.left = this.platform_offset_x + 'px';
     },
 
     circleMoveUp: function (e) {
         if (e.key === 'ArrowUp') {
+            let i = 0;
+
+            let interval = setInterval(function () {
+                for (i; i <= 100;) {
+                    i += 1;
+                    document.querySelector('.box').style.top = -i + 'px';
+                }
+            }, 1000*i);
+
         }
     },
 
-    backgroundMove: function (e) {
+
+
+    elementsMove: function (e) {
         if (this.move_state_right) {
 
             if (e.key === 'ArrowRight') {
@@ -83,14 +96,16 @@ GameElements.prototype = {
 
     disableMoveLeft: function () {
         if (this.bg_offset === 0 || this.platform_offset_x === 0) {
-            console.log(this.bg_offset);
+            console.log('Background offset', this.bg_offset);
+            console.log('Platform offset', this.platform_offset_x);
             this.move_state_left = false;
         }
     },
 
     disableMoveRight: function () {
-        if (this.bg_offset === 200 || this.platform_offset_x === 200) {
-            console.log(this.bg_offset);
+        if (this.bg_offset === this.fullBackground || this.platform_offset_x === -this.platformWidth + 1920) {
+            console.log('Background offset', this.bg_offset);
+            console.log('Platform offset', this.platform_offset_x);
             this.move_state_right = false;
         }
     },
