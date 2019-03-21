@@ -1,104 +1,14 @@
-body {
-  overflow: hidden;
-  height: 100%;
-  margin: 0;
-}
+// Base
+@import 'base/reset';
 
-.wrapper {
-  position: relative;
-}
+// Game objects
+@import 'game-objects/platform';
+@import 'game-objects/background';
+@import 'game-objects/character';
 
-.box {
-  background: #ff0000;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  border-radius: 50%;
-  left: 50vw;
-  bottom: 30vh;
-  transform: translate(-50%, 0);
+// Animations
+@import 'animations/jump';
 
-  &.jump {
-    animation-timing-function: cubic-bezier(.71,.27,.34,.98);
-    animation-name: jump;
-    animation-duration: 1s;
-  }
 
-  @keyframes jump {
 
-    0% {
-      transform: translate(-50%, 0);
-    }
 
-    50% {
-      transform: translate(-50%, -100px);
-    }
-
-    100% {
-      transform: translate(-50%, 0);
-    }
-
-  }
-  
-  &:after {
-    content: '';
-    width: 15px;
-    height: 15px;
-    background: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-  }
-}
-
-.game-background {
-  height: 70vh;
-  position: relative;
-  display: flex;
-  width: 300%;
-
-  .background-layer {
-    background-position: bottom center;
-    background-size: 109% 45%;
-    width: 100%;
-    height: 100%;
-    transition: .1s transform linear;
-    transform: translate3d(-100%, 0, 0);
-    background-repeat: no-repeat;
-  }
-
-  .background-layer-1 {
-    background-image: url('../img/background-img-3.png');
-  }
-
-  .background-layer-2 {
-    background-image: url('../img/background-img-2.png');
-  }
-
-  .background-layer-3 {
-    background-image: url('../img/background-img-3.png');
-  }
-
-}
-
-.game-platform {
-  background: #191933;
-  position: relative;
-  height: calc(30vh - 20px);
-  border: solid #061741;
-  border-width: 10px 0;
-  width: 300%;
-  transition: .1s transform linear;
-
-  &:after {
-    content: 'Ind';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    background: #fff;
-  }
-
-}

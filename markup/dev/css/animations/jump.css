@@ -1,0 +1,31 @@
+.box.jump {
+  -webkit-animation-timing-function: cubic-bezier(0.47, 0.19, 0.39, 0.69);
+          animation-timing-function: cubic-bezier(0.47, 0.19, 0.39, 0.69);
+  -webkit-animation-name: jump;
+          animation-name: jump;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s; }
+
+@-webkit-keyframes jump {
+  0% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0); }
+  50% {
+    -webkit-transform: translate(-50%, -100px);
+            transform: translate(-50%, -100px); }
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0); } }
+
+@keyframes jump {
+  0% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0); }
+  50% {
+    -webkit-transform: translate(-50%, -100px);
+            transform: translate(-50%, -100px); }
+  100% {
+    -webkit-transform: translate(-50%, 0);
+            transform: translate(-50%, 0); } }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuaW1hdGlvbnMvanVtcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBR0ksd0VBQXdEO1VBQXhELGdFQUF3RDtFQUN4RCw2QkFBb0I7VUFBcEIscUJBQW9CO0VBQ3BCLCtCQUFzQjtVQUF0Qix1QkFBc0IsRUFDdkI7O0FBRUQ7RUFFRTtJQUNFLHNDQUE2QjtZQUE3Qiw4QkFBNkIsRUFBQTtFQUcvQjtJQUNFLDJDQUFrQztZQUFsQyxtQ0FBa0MsRUFBQTtFQUdwQztJQUNFLHNDQUE2QjtZQUE3Qiw4QkFBNkIsRUFBQSxFQUFBOztBQVhqQztFQUVFO0lBQ0Usc0NBQTZCO1lBQTdCLDhCQUE2QixFQUFBO0VBRy9CO0lBQ0UsMkNBQWtDO1lBQWxDLG1DQUFrQyxFQUFBO0VBR3BDO0lBQ0Usc0NBQTZCO1lBQTdCLDhCQUE2QixFQUFBLEVBQUEiLCJmaWxlIjoiYW5pbWF0aW9ucy9qdW1wLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib3gge1xyXG5cclxuICAmLmp1bXAge1xyXG4gICAgYW5pbWF0aW9uLXRpbWluZy1mdW5jdGlvbjogY3ViaWMtYmV6aWVyKC40NywuMTksLjM5LC42OSk7XHJcbiAgICBhbmltYXRpb24tbmFtZToganVtcDtcclxuICAgIGFuaW1hdGlvbi1kdXJhdGlvbjogMXM7XHJcbiAgfVxyXG5cclxuICBAa2V5ZnJhbWVzIGp1bXAge1xyXG5cclxuICAgIDAlIHtcclxuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgMCk7XHJcbiAgICB9XHJcblxyXG4gICAgNTAlIHtcclxuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTEwMHB4KTtcclxuICAgIH1cclxuXHJcbiAgICAxMDAlIHtcclxuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgMCk7XHJcbiAgICB9XHJcblxyXG4gIH1cclxuXHJcbn0iXX0= */

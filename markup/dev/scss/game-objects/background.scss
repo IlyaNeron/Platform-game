@@ -1,0 +1,29 @@
+.game-background {
+  height: 70vh;
+  position: relative;
+  display: flex;
+  width: 300%;
+
+  .background-layer {
+    background-position: bottom center;
+    background-size: 109% 45%;
+    width: 100%;
+    height: 100%;
+    transition: .1s transform linear;
+    transform: translate3d(-100%, 0, 0);
+    background-repeat: no-repeat;
+  }
+
+  .background-layer-1 {
+    background-image: url('../img/background-img-3.png');
+  }
+
+  .background-layer-2 {
+    background-image: url('../img/background-img-2.png');
+  }
+
+  .background-layer-3 {
+    background-image: url('../img/background-img-3.png');
+  }
+
+}

@@ -1,0 +1,21 @@
+.game-platform {
+  background: #191933;
+  position: relative;
+  height: calc(30vh - 20px);
+  border: solid #061741;
+  border-width: 10px 0;
+  width: 300%;
+  transition: .1s transform linear;
+
+  &:after {
+    content: 'Ind';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #fff;
+  }
+
+}
