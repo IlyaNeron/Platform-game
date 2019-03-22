@@ -1,14 +1,20 @@
 'use strict';
 
 function GameElements() {
-    this.box = document.querySelector('.box');
+    this.character = document.querySelector('.character');
     this.background = Array.from(document.querySelectorAll('.background-layer'));
     this.fullBackground = document.querySelector('.game-background');
     this.platform = document.querySelector('.game-platform');
+    this.level_objects = document.querySelector('.game-level-objects');
+    this.test_object = document.querySelector('.test-floor');
     this.platform_offset_x = null;
+    this.level_offset_x = null;
+    this.bg_offset_x = null;
     this.move_state_left = false;
     this.move_state_right = true;
     this.key_state = {};
+    this.arrow_up_delay = 0;
+    this.time_event = 300;
 }
 
 GameElements.prototype = {
@@ -24,7 +30,7 @@ GameElements.prototype = {
         this.background.forEach(function (div) {
             this.bgCoordinateX = getComputedStyle(div);
             let matrix = new WebKitCSSMatrix(this.bgCoordinateX.webkitTransform);
-            this.bg_offset = matrix.m41;
+            this.bg_offset_x = matrix.m41;
         }, this);
 
         this.platformWidth = parseInt(getComputedStyle(this.platform).width, 10);
@@ -35,13 +41,16 @@ GameElements.prototype = {
 
     events: function () {
         let _this = this;
+
+        document.addEventListener('keydown', this.jumpAnimationStart.bind(this));
+
         document.addEventListener('keydown', function (e) {
             _this.key_state[e.key] = true;
-        }, true);
+        });
 
         document.addEventListener('keyup', function (e) {
             _this.key_state[e.key] = false;
-        }, true);
+        });
 
         this.inputs = function inputs() {
             if (_this.key_state['ArrowRight']) {
@@ -52,21 +61,43 @@ GameElements.prototype = {
                 _this.elementsMoveLeft();
             }
 
-            if (_this.key_state['ArrowUp']) {
-                _this.circleMoveUp();
-            }
-
             setTimeout(inputs, 50);
-        }
+        };
 
     },
 
-    circleMoveUp: function () {
+    jumpAnimationStart: function (e) {
         let _this = this;
-        _this.box.classList.add('jump');
-        setTimeout(function () {
-            _this.box.classList.remove('jump');
-        }, 1000);
+
+        if (this.arrow_up_delay === 0) {
+
+            if (e.key === 'ArrowUp') {
+                this.arrow_up_delay = this.time_event;
+                this.character.classList.add('jump');
+
+                setTimeout(function () {
+                    console.log('2');
+                    _this.character.classList.remove('jump');
+
+                    setTimeout(function () {
+                        _this.arrow_up_delay = 0;
+                    }, _this.time_event)
+
+                }, _this.time_event);
+
+            }
+
+        }
+    },
+
+    elementsCatch: function () {
+        // this.test_object.getBoundingClientRect();
+        // console.log( this.test_object.getBoundingClientRect().top);
+        // console.log( this.character.getBoundingClientRect().top + 40);
+        //
+        // if ((this.character.getBoundingClientRect().top) + 40 >= this.test_object.getBoundingClientRect().top) {
+        //
+        // }
     },
 
     elementsMoveRight: function () {
@@ -76,7 +107,9 @@ GameElements.prototype = {
             this.move_state_left = true;
             this.backgroundMoveRight();
             this.platformMoveRight();
+            this.levelMoveRight();
             this.disableMoveRight();
+            this.elementsCatch();
         }
 
     },
@@ -88,6 +121,7 @@ GameElements.prototype = {
             this.move_state_right = true;
             this.backgroundMoveLeft();
             this.platformMoveLeft();
+            this.levelMoveLeft();
             this.disableMoveLeft();
 
         }
@@ -95,44 +129,54 @@ GameElements.prototype = {
     },
 
     disableMoveLeft: function () {
-        if (this.bg_offset === 0 || this.platform_offset_x === 0) {
-            console.log('Background offset', this.bg_offset);
+        if (this.bg_offset_x === 0 || this.platform_offset_x === 0) {
+            console.log('Background offset', this.bg_offset_x);
             console.log('Platform offset', this.platform_offset_x);
             this.move_state_left = false;
         }
     },
 
     disableMoveRight: function () {
-        if (this.bg_offset === (this.bgwidth - screen.width)*-1 || this.platform_offset_x === (this.platformWidth - screen.width)*-1) {
+        if (this.bg_offset_x === (this.bgwidth - screen.width)*-1 || this.platform_offset_x === (this.platformWidth - screen.width)*-1) {
             console.log(screen.width);
-            console.log('Background offset', this.bg_offset);
+            console.log('Background offset', this.bg_offset_x);
             console.log('Platform offset', this.platform_offset_x);
             this.move_state_right = false;
         }
     },
 
     backgroundMoveRight: function () {
-        this.bg_offset -= 2;
+        this.bg_offset_x -= 2;
         this.background.forEach(function (div) {
-            div.style.transform = 'translate3d(' + this.bg_offset + 'px' + ',' + '0px' + ',' + '0px' + ')';
+            div.style.transform = 'translate3d(' + this.bg_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
         }, this);
     },
 
     backgroundMoveLeft: function () {
-        this.bg_offset += 2;
+        this.bg_offset_x += 2;
         this.background.forEach(function (div) {
-            div.style.transform = 'translate3d(' + this.bg_offset + 'px' + ',' + '0px' + ',' + '0px' + ')';
+            div.style.transform = 'translate3d(' + this.bg_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
         }, this);
     },
 
     platformMoveRight: function () {
         this.platform_offset_x -= 15;
-        this.platform.style.transform = 'translateX(' + this.platform_offset_x + 'px)';
+        this.platform.style.transform = 'translate3d(' + this.platform_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
     platformMoveLeft: function () {
         this.platform_offset_x += 15;
-        this.platform.style.transform = 'translateX(' + this.platform_offset_x + 'px)';
+        this.platform.style.transform = 'translate3d(' + this.platform_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
+    },
+
+    levelMoveRight: function () {
+      this.level_offset_x -= 15;
+      this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
+    },
+
+    levelMoveLeft: function () {
+      this.level_offset_x += 15;
+      this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
 };

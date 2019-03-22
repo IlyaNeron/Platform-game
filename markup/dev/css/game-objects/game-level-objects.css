@@ -1,0 +1,12 @@
+.game-level-objects {
+  height: 70vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 300%;
+  -webkit-transition: .1s transform linear;
+  -o-transition: .1s transform linear;
+  transition: .1s transform linear; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdhbWUtb2JqZWN0cy9nYW1lLWxldmVsLW9iamVjdHMuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQVk7RUFDWixtQkFBa0I7RUFDbEIsUUFBTztFQUNQLE9BQU07RUFDTixTQUFRO0VBQ1IsWUFBVztFQUNYLHlDQUFnQztFQUFoQyxvQ0FBZ0M7RUFBaEMsaUNBQWdDLEVBQ2pDIiwiZmlsZSI6ImdhbWUtb2JqZWN0cy9nYW1lLWxldmVsLW9iamVjdHMuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmdhbWUtbGV2ZWwtb2JqZWN0cyB7XHJcbiAgaGVpZ2h0OiA3MHZoO1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBsZWZ0OiAwO1xyXG4gIHRvcDogMDtcclxuICByaWdodDogMDtcclxuICB3aWR0aDogMzAwJTtcclxuICB0cmFuc2l0aW9uOiAuMXMgdHJhbnNmb3JtIGxpbmVhcjtcclxufSJdfQ== */

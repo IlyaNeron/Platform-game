@@ -1,0 +1,9 @@
+.test-floor {
+  height: 30px;
+  width: 400px;
+  background: #111;
+  position: absolute;
+  left: 55vw;
+  top: 85%; }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdhbWUtb2JqZWN0cy90ZXN0LWZsb29yLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxhQUFZO0VBQ1osYUFBWTtFQUNaLGlCQUFnQjtFQUNoQixtQkFBa0I7RUFDbEIsV0FBVTtFQUNWLFNBQVEsRUFDVCIsImZpbGUiOiJnYW1lLW9iamVjdHMvdGVzdC1mbG9vci5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGVzdC1mbG9vciB7XHJcbiAgaGVpZ2h0OiAzMHB4O1xyXG4gIHdpZHRoOiA0MDBweDtcclxuICBiYWNrZ3JvdW5kOiAjMTExO1xyXG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICBsZWZ0OiA1NXZ3O1xyXG4gIHRvcDogODUlO1xyXG59Il19 */

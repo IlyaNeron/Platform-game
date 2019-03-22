@@ -1,25 +1,8 @@
-.box {
+.character {
+  transition: transform .3s cubic-bezier(.37,1.14,.88,.99);
 
   &.jump {
-    animation-timing-function: cubic-bezier(.47,.19,.39,.69);
-    animation-name: jump;
-    animation-duration: 1s;
-  }
-
-  @keyframes jump {
-
-    0% {
-      transform: translate(-50%, 0);
-    }
-
-    50% {
-      transform: translate(-50%, -100px);
-    }
-
-    100% {
-      transform: translate(-50%, 0);
-    }
-
+    transform: translateY(-120px);
   }
 
 }

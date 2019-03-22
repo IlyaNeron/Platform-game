@@ -1,4 +1,4 @@
-.box {
+.character {
   background: #ff0000;
   width: 40px;
   height: 40px;
@@ -6,7 +6,7 @@
   border-radius: 50%;
   left: 50vw;
   bottom: 30vh;
-  transform: translate(-50%, 0);
+  //transform: translate(-50%, 0);
 
   &:after {
     content: '';
