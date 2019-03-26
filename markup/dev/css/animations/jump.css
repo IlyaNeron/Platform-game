@@ -4,9 +4,5 @@
   -o-transition: transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99);
   transition: transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99);
   transition: transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99), -webkit-transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99); }
-  .character.jump {
-    -webkit-transform: translateY(-120px);
-        -ms-transform: translateY(-120px);
-            transform: translateY(-120px); }
 
-/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuaW1hdGlvbnMvanVtcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0ZBQXdEO0VBQXhELHdFQUF3RDtFQUF4RCxtRUFBd0Q7RUFBeEQsZ0VBQXdEO0VBQXhELDZIQUF3RCxFQU16RDtFQVBEO0lBSUksc0NBQTZCO1FBQTdCLGtDQUE2QjtZQUE3Qiw4QkFBNkIsRUFDOUIiLCJmaWxlIjoiYW5pbWF0aW9ucy9qdW1wLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jaGFyYWN0ZXIge1xyXG4gIHRyYW5zaXRpb246IHRyYW5zZm9ybSAuM3MgY3ViaWMtYmV6aWVyKC4zNywxLjE0LC44OCwuOTkpO1xyXG5cclxuICAmLmp1bXAge1xyXG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC0xMjBweCk7XHJcbiAgfVxyXG5cclxufSJdfQ== */
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuaW1hdGlvbnMvanVtcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0ZBQXdEO0VBQXhELHdFQUF3RDtFQUF4RCxtRUFBd0Q7RUFBeEQsZ0VBQXdEO0VBQXhELDZIQUF3RCxFQUN6RCIsImZpbGUiOiJhbmltYXRpb25zL2p1bXAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNoYXJhY3RlciB7XHJcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIC4zcyBjdWJpYy1iZXppZXIoLjM3LDEuMTQsLjg4LC45OSk7XHJcbn0iXX0= */
