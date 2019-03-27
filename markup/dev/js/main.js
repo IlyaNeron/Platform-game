@@ -16,13 +16,12 @@ function GameElements() {
     this.arrow_up_delay = 0;
     this.time_event = 300;
     this.character_position = 0;
-    this.default_jump_value = -120;
-    this.jump_value = this.default_jump_value;
+    this.jump_value = -120;
 }
 
 GameElements.prototype = {
     init: function () {
-        this.coordinates();
+        this.elementsValue();
         this.events();
         this.inputs();
         this.disableMoveRight();
@@ -31,7 +30,7 @@ GameElements.prototype = {
         this.backgroundMoveLeft();
     },
 
-    coordinates: function () {
+    elementsValue: function () {
         this.background.forEach(function (div) {
             this.bgCoordinateX = getComputedStyle(div);
             let matrix = new WebKitCSSMatrix(this.bgCoordinateX.webkitTransform);
@@ -65,7 +64,7 @@ GameElements.prototype = {
                 _this.elementsMoveLeft();
             }
 
-            setTimeout(inputs, 10);
+            requestAnimationFrame(inputs);
         };
 
     },
@@ -77,9 +76,9 @@ GameElements.prototype = {
 
             if (e.key === 'ArrowUp') {
                 this.arrow_up_delay = this.time_event;
-                this.character.style.transform = 'translateY(' + this.jump_value +'px)';
+                this.character.style.transform = 'translateY(' + (this.character_position + this.jump_value) + 'px)';
                 setTimeout(function () {
-                    _this.character.style.transform = 'translateY(' + _this.character_position +'px)';
+                    _this.character.style.transform = 'translateY(' + _this.character_position + 'px)';
                     setTimeout(function () {
                         _this.arrow_up_delay = 0;
                     }, _this.time_event)
@@ -93,44 +92,46 @@ GameElements.prototype = {
     },
 
     elementsCatch: function () {
-        this.test_object.getBoundingClientRect();
-        let test_object_XL = this.test_object.getBoundingClientRect().left;
-        let test_object_XR = this.test_object.getBoundingClientRect().right;
-        let test_object_YT = this.test_object.getBoundingClientRect().top;
-        let test_object_YB = this.test_object.getBoundingClientRect().bottom;
-        let character_XL = this.character.getBoundingClientRect().left;
-        let character_XR = this.character.getBoundingClientRect().right;
-        let character_YT = this.character.getBoundingClientRect().top;
-        let character_YB = this.character.getBoundingClientRect().bottom;
+        let character_X = this.character.getBoundingClientRect().left;
+        let character_Y = this.character.getBoundingClientRect().top;
+        let test_object_X = this.test_object.getBoundingClientRect().left;
+        let test_object_Y = this.test_object.getBoundingClientRect().top;
+        let character_W = this.character.clientWidth;
+        let character_H = this.character.clientHeight;
+        let test_object_W = this.test_object.clientWidth;
+        let test_object_H = this.test_object.clientHeight;
+        let YColl = false;
+        let XColl = false;
+        let _this = this;
 
-        console.log('Character Y Top', character_YT + pageXOffset);
-        console.log('Character Y Bottom', character_YB + pageXOffset);
-        console.log('Character X Left', character_XL + pageXOffset);
-        console.log('Character X Right',character_XR + pageXOffset);
-        console.log('Test object Y Top', test_object_YT + pageXOffset);
-        console.log('Test object Y Bottom', test_object_YB + pageXOffset);
-        console.log('Test object X Left', test_object_XL + pageXOffset);
-        console.log('Test object X Right', test_object_XR + pageXOffset);
+        if ((character_X + character_W >= test_object_X) && (character_X <= test_object_X + test_object_W)) {
+            console.log('Character Coordinate X', character_X + character_W);
+            console.log('Test object Coordinate X', test_object_X);
 
+            if (character_Y + character_H >= test_object_Y) {
+                this.jump_value = test_object_Y - (character_Y - character_H);
+                console.log('under');
+            }
 
-        if (test_object_XL < character_XR && test_object_XR > character_XL) {
-            console.log('catch');
-            this.jump_value = test_object_YB - character_YT;
+            if (character_Y + character_H <= test_object_Y) {
+                console.log('top');
+                this.character_position = -100;
+                this.jump_value = -120;
+                console.log(this.jump_value);
+                console.log(this.character_position);
+            }
+
         }
 
-        if (test_object_YT >= character_YB) {
-            this.character_position = -100;
-            this.jump_value = this.default_jump_value + this.character_position;
-            console.log(this.character_position);
-            console.log('catch top');
-        }
-
-        if (test_object_XL > character_XR || test_object_XR < character_XL) {
-            this.jump_value = this.default_jump_value;
-            this.character_position = 0;
+        if ((character_X + character_W <= test_object_X) || (character_X >= test_object_X + test_object_W)) {
             console.log('out');
+            this.jump_value = -120;
         }
 
+        if ((character_X + character_W) >= test_object_X) {
+            if ((character_Y <= test_object_Y + test_object_H) || (character_Y + character_H <= test_object_Y)) {
+            }
+        }
 
     },
 
@@ -195,22 +196,22 @@ GameElements.prototype = {
     },
 
     platformMoveRight: function () {
-        this.platform_offset_x -= 1;
+        this.platform_offset_x -= 0.5;
         this.platform.style.transform = 'translate3d(' + this.platform_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
     platformMoveLeft: function () {
-        this.platform_offset_x += 1;
+        this.platform_offset_x += 0.5;
         this.platform.style.transform = 'translate3d(' + this.platform_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
     levelMoveRight: function () {
-      this.level_offset_x -= 1;
+      this.level_offset_x -= 0.5;
       this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
     levelMoveLeft: function () {
-      this.level_offset_x += 1;
+      this.level_offset_x += 0.5;
       this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
