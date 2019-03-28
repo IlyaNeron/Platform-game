@@ -16,21 +16,24 @@ function GameElements() {
     this.arrow_up_delay = 0;
     this.time_event = 300;
     this.character_position = 0;
-    this.jump_value = -120;
+    this.default_jump_value = -120;
+    this.jump_value = this.default_jump_value;
 }
 
 GameElements.prototype = {
     init: function () {
-        this.elementsValue();
+        this.mainElementsValue();
+        this.elementsDefaultValue();
         this.events();
         this.inputs();
         this.disableMoveRight();
         this.disableMoveLeft();
         this.backgroundMoveRight();
         this.backgroundMoveLeft();
+        this.elementsDynamicValue();
     },
 
-    elementsValue: function () {
+    mainElementsValue: function () {
         this.background.forEach(function (div) {
             this.bgCoordinateX = getComputedStyle(div);
             let matrix = new WebKitCSSMatrix(this.bgCoordinateX.webkitTransform);
@@ -41,6 +44,27 @@ GameElements.prototype = {
         this.bgwidth = parseInt(getComputedStyle(this.fullBackground).width, 10);
         console.log('Platform width', this.platformWidth);
         console.log('Background width', this.bgwidth);
+    },
+
+    elementsDefaultValue: function () {
+
+        this.character_value = {
+            W: this.character.clientWidth,
+            H: this.character.clientHeight,
+            X: this.character.getBoundingClientRect().left,
+            Y: this.character.getBoundingClientRect().top,
+        };
+
+        this.test_object_value = {
+            W: this.test_object.clientWidth,
+            H: this.test_object.clientHeight,
+            Y: this.test_object.getBoundingClientRect().top,
+        };
+
+    },
+
+    elementsDynamicValue: function () {
+
     },
 
     events: function () {
@@ -75,6 +99,8 @@ GameElements.prototype = {
         if (this.arrow_up_delay === 0) {
 
             if (e.key === 'ArrowUp') {
+                console.log('Jump value', this.jump_value);
+                console.log('Character position', this.character_position);
                 this.arrow_up_delay = this.time_event;
                 this.character.style.transform = 'translateY(' + (this.character_position + this.jump_value) + 'px)';
                 setTimeout(function () {
@@ -92,44 +118,53 @@ GameElements.prototype = {
     },
 
     elementsCatch: function () {
-        let character_X = this.character.getBoundingClientRect().left;
         let character_Y = this.character.getBoundingClientRect().top;
         let test_object_X = this.test_object.getBoundingClientRect().left;
-        let test_object_Y = this.test_object.getBoundingClientRect().top;
-        let character_W = this.character.clientWidth;
-        let character_H = this.character.clientHeight;
-        let test_object_W = this.test_object.clientWidth;
-        let test_object_H = this.test_object.clientHeight;
-        let YColl = false;
-        let XColl = false;
-        let _this = this;
 
-        if ((character_X + character_W >= test_object_X) && (character_X <= test_object_X + test_object_W)) {
-            console.log('Character Coordinate X', character_X + character_W);
-            console.log('Test object Coordinate X', test_object_X);
+        if ((this.character_value.X + this.character_value.W >= test_object_X) && (this.character_value.X <= test_object_X + this.test_object_value.W)) {
 
-            if (character_Y + character_H >= test_object_Y) {
-                this.jump_value = test_object_Y - (character_Y - character_H);
-                console.log('under');
+            if (character_Y >= this.test_object_value.Y + this.test_object_value.H) {
+                this.jump_value = this.test_object_value.Y - (this.character_value.Y - this.character_value.H);
+                console.log('under object');
             }
 
-            if (character_Y + character_H <= test_object_Y) {
-                console.log('top');
-                this.character_position = -100;
+            if (character_Y + this.character_value.H <= this.test_object_value.Y) {
+                this.jump_value = this.default_jump_value;
+                console.log('above object');
+                this.character_position = this.test_object_value.Y - (this.character_value.Y + this.character_value.H);
+                this.floor = 1;
+            }
+
+        }
+
+        if ((this.character_value.X + this.character_value.W <= test_object_X) || (this.character_value.X >= test_object_X + this.test_object_value.W)) {
+
+            if (character_Y >= this.test_object_value.Y + this.test_object_value.H) {
                 this.jump_value = -120;
-                console.log(this.jump_value);
-                console.log(this.character_position);
+                console.log('out default');
             }
 
         }
 
-        if ((character_X + character_W <= test_object_X) || (character_X >= test_object_X + test_object_W)) {
-            console.log('out');
-            this.jump_value = -120;
+        if (character_Y + this.character_value.H <= this.test_object_value.Y) {
+
+            if ((this.character_value.X + this.character_value.W < test_object_X) || (this.character_value.X > test_object_X + this.test_object_value.W)) {
+
+                if (this.floor >= 1) {
+                    console.log('out top');
+                    this.character_position -= (this.test_object_value.Y - (this.character_value.Y + this.character_value.H));
+                    this.character.style.transform = 'translateY(' + this.character_position + 'px)';
+                    this.floor = 0;
+                }
+
+            }
+
         }
 
-        if ((character_X + character_W) >= test_object_X) {
-            if ((character_Y <= test_object_Y + test_object_H) || (character_Y + character_H <= test_object_Y)) {
+        if ((character_Y < this.test_object_value.Y + this.test_object_value.H) && (character_Y + this.character_value.H > this.test_object_value.Y)) {
+
+            if ((this.character_value.X + this.character_value.W === this.test_object_value.X - 1)) {
+                console.log('stick');
             }
         }
 
