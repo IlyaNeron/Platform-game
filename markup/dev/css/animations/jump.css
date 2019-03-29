@@ -1,8 +1,0 @@
-.character {
-  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99);
-  transition: -webkit-transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99);
-  -o-transition: transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99);
-  transition: transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99);
-  transition: transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99), -webkit-transform 0.3s cubic-bezier(0.37, 1.14, 0.88, 0.99); }
-
-/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuaW1hdGlvbnMvanVtcC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsZ0ZBQXdEO0VBQXhELHdFQUF3RDtFQUF4RCxtRUFBd0Q7RUFBeEQsZ0VBQXdEO0VBQXhELDZIQUF3RCxFQUN6RCIsImZpbGUiOiJhbmltYXRpb25zL2p1bXAuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNoYXJhY3RlciB7XHJcbiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIC4zcyBjdWJpYy1iZXppZXIoLjM3LDEuMTQsLjg4LC45OSk7XHJcbn0iXX0= */

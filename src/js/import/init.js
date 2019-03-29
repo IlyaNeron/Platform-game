@@ -18,6 +18,7 @@ function GameElements() {
     this.character_position = 0;
     this.default_jump_value = -120;
     this.jump_value = this.default_jump_value;
+    this.floor = null;
 }
 
 GameElements.prototype = {
@@ -107,7 +108,7 @@ GameElements.prototype = {
                     _this.character.style.transform = 'translateY(' + _this.character_position + 'px)';
                     setTimeout(function () {
                         _this.arrow_up_delay = 0;
-                    }, _this.time_event)
+                    }, _this.time_event);
 
                 }, _this.time_event);
 
@@ -119,7 +120,7 @@ GameElements.prototype = {
 
     elementsCatch: function () {
         let character_Y = this.character.getBoundingClientRect().top;
-        let test_object_X = this.test_object.getBoundingClientRect().left;
+        let test_object_X = Math.round(this.test_object.getBoundingClientRect().left);
 
         if ((this.character_value.X + this.character_value.W >= test_object_X) && (this.character_value.X <= test_object_X + this.test_object_value.W)) {
 
@@ -140,7 +141,7 @@ GameElements.prototype = {
         if ((this.character_value.X + this.character_value.W <= test_object_X) || (this.character_value.X >= test_object_X + this.test_object_value.W)) {
 
             if (character_Y >= this.test_object_value.Y + this.test_object_value.H) {
-                this.jump_value = -120;
+                this.jump_value = this.default_jump_value;
                 console.log('out default');
             }
 
@@ -148,7 +149,7 @@ GameElements.prototype = {
 
         if (character_Y + this.character_value.H <= this.test_object_value.Y) {
 
-            if ((this.character_value.X + this.character_value.W < test_object_X) || (this.character_value.X > test_object_X + this.test_object_value.W)) {
+            if ((this.character_value.X + this.character_value.W <= test_object_X) || (this.character_value.X >= test_object_X + this.test_object_value.W)) {
 
                 if (this.floor >= 1) {
                     console.log('out top');
@@ -163,9 +164,10 @@ GameElements.prototype = {
 
         if ((character_Y < this.test_object_value.Y + this.test_object_value.H) && (character_Y + this.character_value.H > this.test_object_value.Y)) {
 
-            if ((this.character_value.X + this.character_value.W === this.test_object_value.X - 1)) {
+            if ((this.character_value.X + this.character_value.W === test_object_X)) {
                 console.log('stick');
             }
+
         }
 
     },
@@ -241,13 +243,13 @@ GameElements.prototype = {
     },
 
     levelMoveRight: function () {
-      this.level_offset_x -= 0.5;
-      this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
+        this.level_offset_x -= 0.5;
+        this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
     levelMoveLeft: function () {
-      this.level_offset_x += 0.5;
-      this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
+        this.level_offset_x += 0.5;
+        this.level_objects.style.transform = 'translate3d(' + this.level_offset_x + 'px' + ',' + '0px' + ',' + '0px' + ')';
     },
 
 };
