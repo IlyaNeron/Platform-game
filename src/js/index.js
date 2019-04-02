@@ -1,1 +1,1 @@
-import "./import/init";
+import "./game-elements/init";
