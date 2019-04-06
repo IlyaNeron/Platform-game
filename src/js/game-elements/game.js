@@ -1,20 +1,21 @@
-import { Background } from "./background";
-import { Platform } from "./platform";
-import { Controls } from "./game-controls";
-import { LevelStructure } from "./level-structure";
-import { Character } from "./character";
-import { Collision } from "./collision";
+import {Background} from "./background";
+import {Platform} from "./platform";
+import {Controls} from "./game-controls";
+import {LevelStructure} from "./level-structure";
+import {Character} from "./character";
+import {Collision} from "./collision";
 
 export class Game {
 
     constructor() {
         this.background = new Background();
         this.platform = new Platform();
-        this.control = new Controls();
         this.level_structure = new LevelStructure();
+        this.control = new Controls();
         this.character = new Character();
         this.collision = new Collision();
         this.collision.detection();
+        console.log(this.level_structure);
 
         this.bg_speed = 1;
         this.bg_vector_right = -1;
@@ -25,7 +26,7 @@ export class Game {
         this.platform_vector_left = 1;
     }
 
-    frame(time) {
+    frame() {
         requestAnimationFrame(time => this.frame(time));
 
         if (this.control.right) {
@@ -47,8 +48,10 @@ export class Game {
 
     }
 
-    move() {
-        requestAnimationFrame(time => this.frame(time));
+
+    start() {
+       // requestAnimationFrame((time) => this.frame(time));
+        this.frame();
     }
 
 }

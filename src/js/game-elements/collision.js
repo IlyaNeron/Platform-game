@@ -7,12 +7,11 @@ export class Collision {
 
     detection() {
         this.block.forEach((block) => {
-            //console.log(block.getBoundingClientRect().left);
 
             if ((this.cr.getBoundingClientRect().left + 30) === (block.getBoundingClientRect().left)) {
-              //  if ((this.cr.getBoundingClientRect().top) > (block.getBoundingClientRect().top + 30)) {
-                    console.log('dsfsf');
-                    alert('dsgd');
+                //  if ((this.cr.getBoundingClientRect().top) > (block.getBoundingClientRect().top + 30)) {
+                console.log('dsfsf');
+                alert('dsgd');
                 //}
             }
         });

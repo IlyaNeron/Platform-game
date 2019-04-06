@@ -5,7 +5,7 @@ export class Controls {
         this.left = false;
         this.right = false;
         this.fire = false;
-        this.keyMap = new Map ([
+        this.keyMap = new Map([
             ['ArrowUp', 'up'], ['ArrowDown', 'down'], ['ArrowLeft', 'left'], ['ArrowRight', 'right'], [' ', 'fire']
         ]);
         document.addEventListener('keydown', (e) => this.update(e, true));

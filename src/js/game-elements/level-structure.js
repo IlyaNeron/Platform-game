@@ -25,17 +25,16 @@ export class LevelStructure {
         ];
 
         this.tile_properties = {
-            ' ': { name: 'empty', bgcolor: ''},
-            'c': { name: 'character', bgcolor: '#2861ff'},
-            'b': { name: 'block', bgcolor: '#333'},
-            'l': { name: 'lava', bgcolor: '#ff4424'},
+            ' ': {name: 'empty', bgcolor: ''},
+            'c': {name: 'character', bgcolor: '#2861ff'},
+            'b': {name: 'block', bgcolor: '#333'},
+            'l': {name: 'lava', bgcolor: '#ff4424'},
         };
     }
 
 
-
     buildOptions() {
-        
+
         for (let i = 0; i < this.level_map.length; i++) {
 
             for (let j = 0; j < this.level_map[i].length; j++) {

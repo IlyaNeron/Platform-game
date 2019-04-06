@@ -1,4 +1,5 @@
 export class Character {
+
     constructor() {
         this.character_offset_x = 0;
         this.character_offset_y = 0;
@@ -11,8 +12,6 @@ export class Character {
         this.character_speed = 1;
         this.character_vector_right = 1;
         this.character_vector_left = -1;
-
-        this.flag = true;
     }
 
     characterMove() {
@@ -32,15 +31,7 @@ export class Character {
 
     characterMoveY() {
         this.characterMove();
-
         this.character_offset_y += (this.jump_speed * this.jump_vector_up);
-
-        if (this.character_offset_y === this.jump_height) {
-            this.jump_vector_up = this.jump_vector_down;
-        }
-
     }
-
-
 
 }

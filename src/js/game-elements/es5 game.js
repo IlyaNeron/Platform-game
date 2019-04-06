@@ -210,7 +210,7 @@ GameElements.prototype = {
     },
 
     disableMoveRight: function () {
-        if (this.bg_offset_x === (this.bgwidth - screen.width)*-1 || this.platform_offset_x === (this.platformWidth - screen.width)*-1) {
+        if (this.bg_offset_x === (this.bgwidth - screen.width) * -1 || this.platform_offset_x === (this.platformWidth - screen.width) * -1) {
             console.log(screen.width);
             console.log('Background offset', this.bg_offset_x);
             console.log('Platform offset', this.platform_offset_x);

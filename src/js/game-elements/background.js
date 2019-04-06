@@ -11,7 +11,7 @@ export class Background {
 
         this.bg_width = parseInt(getComputedStyle(fullBg).width, 10);
 
-        this.bg_layers.forEach ((layer) => {
+        this.bg_layers.forEach((layer) => {
             let bg_style = getComputedStyle(layer);
             let matrix = new WebKitCSSMatrix(bg_style.webkitTransform);
             this.bg_offset_x = matrix.m41;
