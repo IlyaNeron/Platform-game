@@ -1,10 +1,5 @@
 export class Controls {
     constructor() {
-        this.up = false;
-        this.down = false;
-        this.left = false;
-        this.right = false;
-        this.fire = false;
         this.keyMap = new Map([
             ['ArrowUp', 'up'], ['ArrowDown', 'down'], ['ArrowLeft', 'left'], ['ArrowRight', 'right'], [' ', 'fire']
         ]);

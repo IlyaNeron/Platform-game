@@ -14,8 +14,7 @@ export class Game {
         this.control = new Controls();
         this.character = new Character();
         this.collision = new Collision();
-        this.collision.detection();
-        console.log(this.level_structure);
+        this.collision.blocksPos();
 
         this.bg_speed = 1;
         this.bg_vector_right = -1;
@@ -33,6 +32,7 @@ export class Game {
             this.background.bgTransform(this.bg_speed, this.bg_vector_right);
             this.platform.platformTransform(this.platform_speed, this.platform_vector_right);
             this.character.characterMoveXRight();
+            this.collision.characterPosition();
             this.collision.detection();
         }
 
@@ -40,6 +40,8 @@ export class Game {
             this.background.bgTransform(this.bg_speed, this.bg_vector_left);
             this.platform.platformTransform(this.platform_speed, this.platform_vector_left);
             this.character.characterMoveXLeft();
+            this.collision.characterPosition();
+            this.collision.detection();
         }
 
         if (this.control.up) {
@@ -48,9 +50,7 @@ export class Game {
 
     }
 
-
     start() {
-       // requestAnimationFrame((time) => this.frame(time));
         this.frame();
     }
 
