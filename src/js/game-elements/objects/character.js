@@ -1,6 +1,11 @@
-export class Character {
+import {BaseObject} from './base-object';
+export class Character extends BaseObject {
 
     constructor() {
+        super();
+
+        this.background = '#00f';
+
         this.character = {
             offset_x: 0,
             offset_y: 0,
@@ -38,19 +43,24 @@ export class Character {
 
     characterMoveY() {
         this.characterMove();
-        console.log('request');
+        const jump_height = -120;
 
-        if (this.character.offset_y >= this.jump.height) {
-            this.character.offset_y += (this.jump.speed) * this.jump.vector_up;
+        if (this.character.offset_y >= jump_height) {
+            let req = requestAnimationFrame(() => this.characterMoveY());
+            this.character.offset_y += this.jump.speed * this.jump.vector_up;
+            console.log(this.character.offset_y);
 
-            if (this.character.offset_y === this.jump.height) {
-                this.jump.vector_up = this.jump.vector_down;
+            if (this.character.offset_y === jump_height) {
+                this.jump.vector_up = 1;
             }
 
-            if (this.character.offset_y === 0) {
-                this.jump.vector_up = 0;
-            }
+            setTimeout(() => {
+                cancelAnimationFrame(req)
+            }, 300);
         }
+
+
+        //console.log(this.n);
     }
 
 }

@@ -1,9 +1,9 @@
-import {Background} from "./background";
-import {Platform} from "./platform";
-import {Controls} from "./game-controls";
-import {LevelStructure} from "./level-structure";
-import {Character} from "./character";
-import {Collision} from "./collision";
+import {Background} from './background';
+import {Platform} from './platform';
+import {Controls} from './game-controls';
+import {LevelStructure} from './level-structure';
+import {Character} from './objects/character';
+import {Collision} from './collision';
 
 export class Game {
 

@@ -1,5 +1,6 @@
 export class Controls {
     constructor() {
+        this.up = false;
         this.keyMap = new Map([
             ['ArrowUp', 'up'], ['ArrowDown', 'down'], ['ArrowLeft', 'left'], ['ArrowRight', 'right'], [' ', 'fire']
         ]);
@@ -12,6 +13,7 @@ export class Controls {
         if (this.keyMap.has(e.key)) {
             this[this.keyMap.get(e.key)] = pressed;
         }
+
     }
 
 }
