@@ -1,14 +1,14 @@
+import {bg} from '../auxiliary/background-settings';
+
 export class Background {
-    constructor(bg_width, bg_offset_x) {
-        this.bg_width = bg_width;
-        this.bg_offset_x = bg_offset_x;
+    constructor() {
+        this.bg = bg;
         this.bgProperties();
     }
 
     bgProperties() {
         this.bg_layers = Array.from(document.querySelectorAll('.background-layer'));
         const fullBg = document.querySelector('.game-background');
-
         this.bg_width = parseInt(getComputedStyle(fullBg).width, 10);
 
         this.bg_layers.forEach((layer) => {
@@ -18,11 +18,20 @@ export class Background {
         }, this);
     }
 
-    bgTransform(bg_speed, bg_vector) {
-        this.bg_offset_x += (bg_speed * bg_vector);
+    bgTransform() {
         this.bg_layers.forEach((layer) => {
             layer.style.transform = 'translate3d(' + this.bg_offset_x + 'px,' + '0px,' + '0px)';
         });
+    }
+
+    bgTransformRight() {
+        this.bgTransform();
+        this.bg_offset_x += (this.bg.speed * this.bg.vector_right);
+    }
+
+    bgTransformLeft() {
+        this.bgTransform();
+        this.bg_offset_x += (this.bg.speed * this.bg.vector_left);
     }
 
 }

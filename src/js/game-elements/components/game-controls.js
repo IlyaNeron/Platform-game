@@ -9,11 +9,8 @@ export class Controls {
     }
 
     update(e, pressed) {
-
         if (this.keyMap.has(e.key)) {
             this[this.keyMap.get(e.key)] = pressed;
         }
-
     }
-
 }

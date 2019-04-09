@@ -1,4 +1,4 @@
-import {Game} from "./game";
+import {Game} from "./base/game";
 
 window.addEventListener('DOMContentLoaded', () => {
     const platformGame = new Game();

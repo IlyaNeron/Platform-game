@@ -4,7 +4,7 @@ function GameElements() {
     this.character = document.querySelector('.character');
     this.background = Array.from(document.querySelectorAll('.background-layer'));
     this.fullBackground = document.querySelector('.game-background');
-    this.platform = document.querySelector('.game-platform');
+    this.platform = document.querySelector('.game-platformSettings');
     this.level_objects = document.querySelector('.game-level-objects');
     this.test_object = document.querySelector('.test-object');
     this.platform_offset_x = null;
