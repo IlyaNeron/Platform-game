@@ -34,7 +34,6 @@ export class Collision extends CharacterMove {
         if ((this.playerCoord.XR >= this.blocksCoord.XL) && (this.playerCoord.XL <= this.blocksCoord.XR)) {
             if (this.playerCoord.YT > this.blocksCoord.YB) {
                 console.log('under block');
-                this.properties.offset_y = 0;
                 this.jump.landing = true;
                 this.jump.jumping = false;
             }

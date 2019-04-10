@@ -34,14 +34,14 @@ export class CharacterMove extends Character {
         this.properties.position += this.jump.gravity;
         this.properties.offset_y += this.properties.position;
 
-        // if (this.properties.offset_y >= 0) {
-        //     this.jump.jumping = false;
-        //     this.jump.landing = true;
-        //     this.properties.offset_y = 0;
-        // }
-        //
-        // if (this.jump.landing) {
-        //     this.properties.position = 0;
-        // }
+        if (this.properties.offset_y >= 0) {
+            this.jump.jumping = false;
+            this.jump.landing = true;
+            this.properties.offset_y = 0;
+        }
+
+        if (this.jump.landing) {
+            this.properties.position = 0;
+        }
     }
 }
