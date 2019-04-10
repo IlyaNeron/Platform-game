@@ -28,6 +28,7 @@ export class LevelStructure {
                     case 'b':
                         const objB = new Block();
                         build_elem.style.background = objB.background;
+                        build_elem.classList.add(objB.className);
                         break;
                     case 'l':
                         const objL = new Lava();

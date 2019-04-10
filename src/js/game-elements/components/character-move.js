@@ -6,8 +6,7 @@ export class CharacterMove extends Character {
     }
 
     characterMove() {
-        this.character_elem = document.querySelector('.character');
-        this.character_elem.style.transform = 'translate3d(' + this.properties.offset_x + 'px,' + this.properties.offset_y + 'px,' + '0px)';
+        this.htmlElem.style.transform = 'translate3d(' + this.properties.offset_x + 'px,' + this.properties.offset_y + 'px,' + '0px)';
     }
 
     characterMoveXRight() {
@@ -21,20 +20,28 @@ export class CharacterMove extends Character {
     }
 
     characterMoveY() {
-        if(!this.jump.jumping) {
+        if(!this.jump.jumping && this.jump.landing) {
             this.jump.jumping = true;
-            this.jump.distance = -this.jump.speed * 2;
+            this.jump.landing = false;
+            this.properties.position = -this.jump.speed * 2;
         }
     }
 
     jumpOptions() {
         this.characterMove();
-        this.jump.distance += this.jump.gravity;
-        this.properties.offset_y += this.jump.distance;
+        this.jump.landing = false;
 
-        if (this.properties.offset_y >= 0) {
-            this.properties.offset_y = 0;
-            this.jump.jumping = false;
-        }
+        this.properties.position += this.jump.gravity;
+        this.properties.offset_y += this.properties.position;
+
+        // if (this.properties.offset_y >= 0) {
+        //     this.jump.jumping = false;
+        //     this.jump.landing = true;
+        //     this.properties.offset_y = 0;
+        // }
+        //
+        // if (this.jump.landing) {
+        //     this.properties.position = 0;
+        // }
     }
 }

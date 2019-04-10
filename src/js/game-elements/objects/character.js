@@ -6,6 +6,7 @@ export class Character extends BaseObject {
     constructor() {
         super();
 
+        this.htmlElem = document.querySelector('.character');
         this.properties = character;
         this.jump = character_jump;
     }

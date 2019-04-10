@@ -3,5 +3,6 @@ export class Block extends BaseObject {
     constructor() {
         super();
         this.background = '#333';
+        this.className = 'block';
     }
 }
