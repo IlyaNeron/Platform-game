@@ -24,6 +24,7 @@ export class LevelStructure {
                         const objC = new Character();
                         build_elem.style.background = objC.properties.background;
                         build_elem.classList.add(objC.properties.className);
+                        console.log('character');
                         break;
                     case 'b':
                         const objB = new Block();
@@ -33,6 +34,7 @@ export class LevelStructure {
                     case 'l':
                         const objL = new Lava();
                         build_elem.style.background = objL.background;
+                        console.log('lava');
                         break;
                 }
 
@@ -45,9 +47,7 @@ export class LevelStructure {
 
                 this.level_parent.appendChild(build_elem);
             }
-
         }
-
     }
 
 }

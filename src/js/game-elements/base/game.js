@@ -17,9 +17,10 @@ export class Game {
 
     frame() {
         requestAnimationFrame(time => this.frame(time));
+        this.character_move.jumpOptions();
         this.collision.playerCoordinates();
         this.collision.blocksCoordinates();
-        this.character_move.jumpOptions();
+        this.character_move.characterMove();
 
         if (this.control.right) {
             this.background.bgTransformRight();
