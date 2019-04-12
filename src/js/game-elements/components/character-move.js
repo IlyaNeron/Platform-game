@@ -6,15 +6,21 @@ export class CharacterMove extends Character {
     }
 
     characterMove() {
-        this.htmlElem.style.transform = 'translate3d(' + this.properties.offset_x + 'px,' + this.properties.offset_y + 'px,' + '0px)';
+        this.htmlElem.style.transform = 'matrix(1, 0, 0, 1,' + this.properties.offset_x + ',' + this.properties.offset_y + ')';
+        this.properties.positionX *= this.properties.friction;
+        this.properties.offset_x += this.properties.positionX;
     }
 
     characterMoveXRight() {
-        this.properties.offset_x += this.properties.speed * this.properties.vector_right;
+        if (this.properties.positionX < this.properties.speed) {
+            this.properties.positionX++;
+        }
     }
 
     characterMoveXLeft() {
-        this.properties.offset_x += this.properties.speed * this.properties.vector_left;
+        if (this.properties.positionX > -this.properties.speed) {
+            this.properties.positionX--;
+        }
     }
 
     characterMoveY() {
@@ -27,7 +33,6 @@ export class CharacterMove extends Character {
 
     jumpOptions() {
         this.jump.landing = false;
-
         this.properties.positionY += this.jump.gravity;
         this.properties.offset_y += this.properties.positionY;
 

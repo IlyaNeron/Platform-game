@@ -31,12 +31,14 @@ export class Collision extends CharacterMove {
             this.dir = this.colCheck(this.playerCoord, this.blocksCoord);
 
             if (this.dir === 'left' || this.dir === 'right') {
+                this.properties.positionX = 0;
                 this.jump.jumping = false;
+                console.log(this.dir);
             } else if (this.dir === 'bottom') {
                 this.jump.jumping = false;
                 this.jump.landing = true;
             } else if (this.dir === 'top') {
-                this.properties.positionY = 0;
+                this.properties.positionY *= -1;
             }
         }
     }
@@ -44,37 +46,27 @@ export class Collision extends CharacterMove {
     colCheck(Player, Block) {
         let vectorX = (Player.XL + (this.objectSize.width / 2)) - (Block.XL + (this.objectSize.width / 2));
         let vectorY = (Player.YT + (this.objectSize.height / 2)) - (Block.YT + (this.objectSize.height / 2));
+        let halfWidth = (this.objectSize.width / 2) + (this.objectSize.width / 2);
+        let halfHeight = (this.objectSize.height / 2) + (this.objectSize.height / 2);
+        let colDir = null;
 
-        const hWidths = (this.objectSize.width / 2) + (this.objectSize.width / 2);
-        const hHeights = (this.objectSize.height / 2) + (this.objectSize.height / 2);
-        this.colDir = null;
+        if (Math.abs(vectorX) < halfWidth && Math.abs(vectorY) < halfHeight) {
+            let outX = halfWidth - Math.abs(vectorX);
+            let outY = halfHeight - Math.abs(vectorY);
+            console.log(outX, outY);
 
-        if (Math.abs(vectorX) < hWidths && Math.abs(vectorY) < hHeights) {
-            let outX = hWidths - Math.abs(vectorX);
-            let outY = hHeights - Math.abs(vectorY);
-
-            if (outX >= outY) {
-                if (vectorY > 0) {
-                    this.colDir = 'top';
-                    console.log('top');
-                    Player.Y += outY;
-                } else {
-                    this.colDir = 'bottom';
-                    Player.Y -= outY;
-                    console.log('bottom');
+            if (outX >= 0) {
+                if (outY - outX <= 30 && outY - outX >= 28) {
+                    
+                    alert('sdf');
                 }
-            } else {
-                if (vectorX > 0) {
-                    this.colDir = 'left';
-                    Player.X += outX;
-                    console.log('left');
-                } else {
-                    this.colDir = 'right';
-                    Player.X -= outX;
-                    console.log('right');
-                }
+                //console.log('touch');
             }
         }
+
+
+
+
         return this.colDir;
     }
 }
