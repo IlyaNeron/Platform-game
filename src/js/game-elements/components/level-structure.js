@@ -13,7 +13,6 @@ export class LevelStructure {
     }
 
     buildOptions() {
-
         for (let i = 0; i < this.level_map.length; i++) {
             for (let j = 0; j < this.level_map[i].length; j++) {
                 let build_elem = document.createElement('div');
@@ -22,19 +21,25 @@ export class LevelStructure {
                 switch (tile_id) {
                     case 'c':
                         const objC = new Character();
-                        build_elem.style.background = objC.properties.background;
-                        build_elem.classList.add(objC.properties.className);
-                        console.log('character');
+                        objC.character_properties.offset_x = j * 30;
+                        objC.character_properties.offset_y = i * 30;
+                        build_elem.style.background = objC.character_properties.background;
+                        build_elem.style.transform = 'matrix(1, 0, 0, 1,' + objC.character_properties.offset_x + ',' + objC.character_properties.offset_y + ')';
+                        build_elem.style.position = 'absolute';
+                        build_elem.classList.add(objC.character_properties.className);
                         break;
                     case 'b':
                         const objB = new Block();
-                        build_elem.style.background = objB.background;
-                        build_elem.classList.add(objB.className);
+                        objB.block_properties.offset_x = j * 30;
+                        objB.block_properties.offset_y = i * 30;
+                        build_elem.style.transform = 'matrix(1, 0, 0, 1,' + objB.block_properties.offset_x + ',' + objB.block_properties.offset_y + ')';
+                        build_elem.style.background = objB.block_properties.background;
+                        build_elem.style.position = 'absolute';
+                        build_elem.classList.add(objB.block_properties.className);
                         break;
                     case 'l':
                         const objL = new Lava();
                         build_elem.style.background = objL.background;
-                        console.log('lava');
                         break;
                 }
 
