@@ -1,5 +1,4 @@
 import {CharacterMove} from './character-move';
-import {Block} from '../objects/block';
 
 export class Collision extends CharacterMove {
     constructor() {
@@ -19,17 +18,20 @@ export class Collision extends CharacterMove {
 
     blocksCoordinates() {
         this.blocksArray = Array.from(document.querySelectorAll('.block'));
+
         for (let i = 0; i < this.blocksArray.length; i++) {
             let blockId = this.blocksArray[i];
-            const objB = new Block();
+
+            const style = getComputedStyle(blockId);
+            const matrix = new WebKitCSSMatrix(style.webkitTransform);
 
             this.blocksCoord = {
                 XL: Math.round(blockId.getBoundingClientRect().left),
                 XR: Math.round(blockId.getBoundingClientRect().left + this.objectSize.width),
                 YT: Math.round(blockId.getBoundingClientRect().top),
                 YB: Math.round(blockId.getBoundingClientRect().top + this.objectSize.height),
-                X: objB.block_properties.offset_x,
-                Y: objB.block_properties.offset_y,
+                X: matrix.m41,
+                Y: matrix.m42,
             };
 
             this.dir = this.colCheck(this.playerCoord, this.blocksCoord);
@@ -37,10 +39,9 @@ export class Collision extends CharacterMove {
             if (this.dir === 'left' || this.dir === 'right') {
                 this.character_properties.positionX = 0;
                 this.jump.jumping = false;
-                console.log(this.dir);
             } else if (this.dir === 'bottom') {
-                this.jump.jumping = false;
                 this.jump.landing = true;
+                this.jump.jumping = false;
             } else if (this.dir === 'top') {
                 this.character_properties.positionY *= -1;
             }
@@ -54,36 +55,32 @@ export class Collision extends CharacterMove {
         let halfHeight = (this.objectSize.height / 2) + (this.objectSize.height / 2);
         let colDir = null;
 
-       // console.log(halfWidth - Math.abs((vectorX)));
-
-        if (Math.abs(vectorX) <= halfWidth && Math.abs(vectorY) <= halfHeight) {
+        if (Math.abs(vectorX) < halfWidth && Math.abs(vectorY) < halfHeight) {
             let outX = halfWidth - Math.abs(vectorX);
             let outY = halfHeight - Math.abs(vectorY);
-            //console.log(outX, outY);
 
             if (outX >= outY) {
                 if (vectorY > 0) {
-                    //console.log('top');
+                    console.log('top');
+                    colDir = 'top';
                     Player.Y += outY;
-                   // console.log(this.properties.offset_y)
-                }
-                if (vectorY < 0) {
-                   // console.log('bottom');
+                } else {
+                    console.log('bottom');
+                    colDir = 'bottom';
                     Player.Y -= outY;
                 }
-            }
-            if (outX <= outY) {
+            } else {
                 if (vectorX > 0) {
+                    console.log('left');
+                    colDir = 'left';
                     Player.X += outX;
-                    //console.log('left');
-                }
-                if (vectorX < 0) {
+                } else {
+                    console.log('right');
+                    colDir = 'right';
                     Player.X -= outX;
-                    //console.log('right')
                 }
             }
-
         }
-        return this.colDir;
+        return colDir;
     }
 }

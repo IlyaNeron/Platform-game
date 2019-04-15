@@ -5,8 +5,6 @@ export const character = {
     positionY: 0,
     friction: 0.8,
     speed: 5,
-    vector_right: 1,
-    vector_left: -1,
     className: 'character',
     background: '#00f',
 };
@@ -14,7 +12,6 @@ export const character = {
 export const character_jump = {
     speed: 8,
     gravity: 0.85,
-    distance: 0,
     jumping: false,
     landing: false,
 };

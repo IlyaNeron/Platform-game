@@ -39,13 +39,19 @@ export class LevelStructure {
                         break;
                     case 'l':
                         const objL = new Lava();
-                        build_elem.style.background = objL.background;
+                        objL.lava_properties.offset_x = j * 30;
+                        objL.lava_properties.offset_y = i * 30;
+                        build_elem.style.background = objL.lava_properties.background;
+                        build_elem.style.position = 'absolute';
+                        build_elem.style.transform = 'matrix(1, 0, 0, 1,' + objL.lava_properties.offset_x + ',' + objL.lava_properties.offset_y + ')';
                         break;
                 }
 
                 const obj = new BaseObject();
                 build_elem.style.width = obj.objectSize.width + 'px';
                 build_elem.style.height = obj.objectSize.height + 'px';
+                build_elem.style.position = 'absolute';
+                build_elem.style.transform = 'matrix(1, 0, 0, 1,' + j * 30 + ',' + i * 30 + ')';
 
                 this.level_parent.style.width = obj.objectSize.width * this.level_map[i].length + 'px';
                 this.level_parent.style.height = obj.objectSize.height * this.level_map.length + 'px';

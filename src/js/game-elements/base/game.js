@@ -21,6 +21,7 @@ export class Game {
         this.collision.playerCoordinates();
         this.collision.blocksCoordinates();
         this.character_move.characterMove();
+        this.character_move.moveOptions();
 
         if (this.control.right) {
             this.background.bgTransformRight();
